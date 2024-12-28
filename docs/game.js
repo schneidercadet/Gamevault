@@ -179,7 +179,6 @@ function createGameCard(game) {
 }
 
 async function showGameDetails(gameId) {
-    // Create modal with progress bar
     const modal = document.createElement('div');
     modal.className = 'game-modal';
     modal.innerHTML = `
@@ -195,14 +194,12 @@ async function showGameDetails(gameId) {
     `;
     document.body.appendChild(modal);
 
-    // Get progress bar element
     const progressBar = modal.querySelector('.progress-bar__fill');
     let progress = 0;
 
-    // Simulate progress while loading
     const progressInterval = setInterval(() => {
-        if (progress < 90) {  // Only go up to 90% until actually loaded
-            progress += Math.random() * 30;  // Random increments for more natural feel
+        if (progress < 90) {  
+            progress += Math.random() * 30; 
             progress = Math.min(progress, 90);
             progressBar.style.width = `${progress}%`;
         }
@@ -210,12 +207,8 @@ async function showGameDetails(gameId) {
 
     try {
         const gameDetails = await GameAPI.getGameDetails(gameId);
-        
-        // Complete the progress bar
         clearInterval(progressInterval);
         progressBar.style.width = '100%';
-
-        // Wait for progress bar animation to complete
         setTimeout(() => {
             const modalContent = modal.querySelector('.game-modal__content');
             modalContent.innerHTML = `
@@ -234,8 +227,7 @@ async function showGameDetails(gameId) {
                     </div>
                 </div>
             `;
-        }, 500); // Give time for the 100% progress to be visible
-
+        }, 500); 
     } catch (error) {
         clearInterval(progressInterval);
         const modalContent = modal.querySelector('.game-modal__content');
@@ -335,6 +327,11 @@ async function changePage(page) {
             showError('No more games available.');
             return;
         }
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
         
         await renderGames(response.results);
         
