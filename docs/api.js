@@ -31,7 +31,7 @@ const GameAPI = {
         platforms = '4,5,6,187'
     } = {}) {
         try {
-            const url = `${this.config.BASE_URL}/games?key=${this.config.API_KEY}&page=${page}&page_size=${pageSize}&ordering=${ordering}&metacritic=${metacritic}&dates=${dates}&platforms=${platforms}&search=${search}`;
+            const url = `${this.config.BASE_URL}/games?key=${this.config.API_KEY}&page=${page}&page_size=${pageSize}&ordering=${ordering}&metacritic=${metacritic}&dates=${dates}&platforms=${platforms}&search=${search}&exclude_content=nsfw,explicit&tags_exclude=nsfw,nudity,sexual-content,adult`;
 
             const response = await fetch(url);
             if (!response.ok) throw new Error('Failed to fetch games');
