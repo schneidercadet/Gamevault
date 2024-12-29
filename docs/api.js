@@ -21,14 +21,20 @@ const GameAPI = {
         return 'N/A';
     },
 
+    getLastMonthDate() {
+        const today = new Date();
+        const lastMonth = new Date(today.setMonth(today.getMonth() - 1));
+        return `${lastMonth.toISOString().split('T')[0]},${new Date().toISOString().split('T')[0]}`;
+    },
+
     async getGames({ 
         page = 1,
         search = '',
         pageSize = 40,
-        ordering = '-relevance, -rating', 
-        metacritic = '',
+        ordering = '-popularity_precise,-metacritic', 
+        metacritic = '100',
         dates = this.getLastYearDateRange(),
-        platforms = '4,5,6,187'
+        platforms = '4,5,6'
     } = {}) {
         try {
             const url = `${this.config.BASE_URL}/games?key=${this.config.API_KEY}&page=${page}&page_size=${pageSize}&ordering=${ordering}&metacritic=${metacritic}&dates=${dates}&platforms=${platforms}&search=${search}&exclude_content=nsfw,explicit&tags_exclude=nsfw,nudity,sexual-content,adult`;

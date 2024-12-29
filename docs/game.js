@@ -327,11 +327,6 @@ async function changePage(page) {
             showError('No more games available.');
             return;
         }
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
         
         await renderGames(response.results);
         
@@ -355,9 +350,30 @@ async function initializeApp() {
         
         const response = await GameAPI.getGames({
             pageSize: GameAPI.config.DEFAULT_PAGE_SIZE,
-            ordering: '-relevance,-metacritic'
+            ordering: '-relevance,-popularity_precise,-metacritic',
+            dates: GameAPI.getLastYearDateRange()
         });
 
+        const popularGames = await GameAPI.getGames({
+            pageSize: 10,
+            ordering: '-metacritic,-rating',
+            dates: GameAPI.getLastYearDateRange()
+        });
+
+        const trendingGames = await GameAPI.getGames({
+            pageSize: 10,
+            ordering: '-popularity_precise',
+            dates: GameAPI.getLastMonthDate()
+        });
+
+        const allGames = await GameAPI.getGames({
+            pageSize: GameAPI.config.DEFAULT_PAGE_SIZE,
+            ordering: '-released,-metacritic'
+        });
+
+        await renderGames(popularGames.results, 'popularGamesGrid');
+        await renderGames(trendingGames.results, 'trendingGamesGrid');
+        await renderGames(allGames.results, 'allGamesGrid');
         await renderGames(response.results);
         
         const totalPages = Math.min(Math.ceil(response.count / GameAPI.config.DEFAULT_PAGE_SIZE), 100);

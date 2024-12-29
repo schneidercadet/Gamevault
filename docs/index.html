@@ -3,79 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="GameVault - Your Ultimate Gaming Library" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="GameVault - Discover Popular and Trending Games" />
     <title>GameVault</title>
-    
-    <link rel="preconnect" href="https://kit.fontawesome.com">
-    <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preconnect" href="https://lottie.host">
-    
     <link rel="stylesheet" href="styles.css" />
-    <script
-      src="https://kit.fontawesome.com/5b3bfbded5.js"
-      crossorigin="anonymous"
-      defer
-    ></script>
+    <script src="https://kit.fontawesome.com/5b3bfbded5.js" crossorigin="anonymous" defer></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
   </head>
   
   <body>
     <header class="header" aria-label="Header">
-      <nav class="nav" aria-label="Navigation">
-        <div class="nav__container">
-          <a href="" class="nav__logo" aria-label="GameVault Logo">
-            <img src="./assets/LOGO.png" alt="GameVault Logo">
-            <span class="logo__title">GameVault</span>
-          </a>
-          <form class="search__form" id="searchForm" aria-label="Search Form">
-            <input 
-              type="search" 
-              id="searchInput" 
-              placeholder="Search games..."
-              aria-label="Search games"
-              autocomplete="off"
-            >
-            <button type="submit" class="search__button" aria-label="Search">
-              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            </button>
-          </form>
-        </div>
-      </nav>
-    </header>
+        <nav class="nav" aria-label="Navigation">
+          <div class="nav__container">
+            <a href="index.html" class="nav__logo" aria-label="GameVault Logo">
+              <img src="./assets/LOGO.png" alt="GameVault Logo">
+              <span class="logo__title">GameVault</span>
+            </a>
+            <form class="search__form" id="searchForm" aria-label="Search Form">
+              <input 
+                type="search" 
+                id="searchInput" 
+                placeholder="Search games..."
+                aria-label="Search games"
+                autocomplete="off"
+              >
+              <button type="submit" class="search__button" aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </nav>
+      </header>
 
     <main class="main" aria-label="Main Content">
       <div id="loadingOverlay" class="loading__overlay" aria-hidden="true">
-        <lottie-player
-          class="loading__animation" 
-          src="./assets/loading.json" 
-          speed="1" 
-          loop 
-          autoplay 
-          mode="normal">
-        </lottie-player>
+        <div class="progress-bar">
+          <div class="progress-bar__fill"></div>
+        </div>
       </div>
 
-      <h1 class="header__title">Featured Games</h1>
-
-      <section class="filters" aria-label="Game filters">
-        <div class="filters__container">
-          <select id="platformFilter" aria-label="Filter by platform">
-            <option value="" disabled selected>Platform</option>
-          </select>
-          <select id="genreFilter" aria-label="Filter by genre">
-            <option value="" disabled selected>Genre</option>
-          </select>
-          <select id="yearFilter" aria-label="Filter by year">
-            <option value="" disabled selected>Year</option>
-          </select>
-        </div>
+      <section class="hero">
+        <h1>Discover Your Next Favorite Game</h1>
+        <p>Explore the latest and greatest in gaming</p>
       </section>
 
-      <section class="games__container" aria-label="Games Container">
-        <div id="gamesGrid"></div>
-        <div class="pagination" id="pagination"></div>
+      <section class="popular-games section">
+        <div class="section__header">
+          <h2 class="section__title">Popular Games</h2>
+          <a href="games.html" class="section__link">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="games-row" id="popularGamesGrid"></div>
+      </section>
+
+      <section class="trending-games section">
+        <div class="section__header">
+          <h2 class="section__title">Trending This Month</h2>
+          <a href="games.html" class="section__link">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="games-row" id="trendingGamesGrid"></div>
       </section>
     </main>
 
@@ -104,6 +88,6 @@
 
     <!-- Scripts -->
     <script src="api.js" defer></script>
-    <script src="game.js" defer></script>
+    <script src="home.js" defer></script> 
   </body>
 </html>
