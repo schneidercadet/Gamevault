@@ -1,5 +1,4 @@
 {
-  "/api/games/[id]/route": "app/api/games/[id]/route.js",
   "/games/page": "app/games/page.js",
   "/settings/page": "app/settings/page.js"
 }
