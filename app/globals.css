@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 100%;
+    --background-lighter: 240 10% 96%;
+    --foreground: 240 10% 3.9%;
+    --foreground-muted: 240 3.8% 46.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+
+    --primary: 262 100% 64%;
+    --primary-dark: 262 83% 58%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 327 100% 86%;
+    --secondary-dark: 327 100% 81%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    --ring: 262 83% 58%;
+    --error: 0 84% 60%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --background-lighter: 240 9% 13%;
+    --foreground: 0 0% 98%;
+    --foreground-muted: 240 5% 64.9%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+
+    --primary: 262 100% 64%;
+    --primary-dark: 262 83% 58%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 327 100% 86%;
+    --secondary-dark: 327 100% 81%;
+    --secondary-foreground: 0 0% 98%;
+
+    --error: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground min-h-screen antialiased;
+  }
+}
+
+@layer utilities {
+  .scrollbar-custom {
+    @apply scrollbar-thin scrollbar-thumb-background-lighter scrollbar-track-transparent;
+  }
+  
+  .glass-panel {
+    @apply bg-background-lighter/95 backdrop-blur-sm border-background/20;
+  }
+  
+  .message-bubble {
+    @apply px-3 py-2 rounded-lg transition-colors;
+  }
+
+  .interactive-hover {
+    @apply transition-all duration-200 hover:opacity-90 active:scale-95;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark;
+  }
+
+  .panel-blur {
+    @apply bg-background-lighter/95 backdrop-blur-sm border-background-lighter/20;
+  }
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Loading Animation Styles */
+.game-modal__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 10px rgba(162, 96, 255, 0.2);
+}
+
+.progress-bar__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #a260ff, #ffbae2);
+  width: 0;
+  animation: loading 2s ease infinite;
+  border-radius: 4px;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+/* Layout Styles */
+.social-layout {
+  @apply grid h-screen;
+  grid-template-columns: 240px 1fr;
+}
+
+/* Message Styles */
+.message-group {
+  @apply space-y-1 py-1;
+}
+
+.message-group:first-child {
+  @apply pt-0;
+}
+
+.message-group:last-child {
+  @apply pb-0;
+}
+
+/* Transition Styles */
+.slide-in {
+  animation: slideIn 0.2s ease-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
